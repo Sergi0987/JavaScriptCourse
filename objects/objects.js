@@ -5,21 +5,19 @@
         return "hello";
     }
  };
-
- const playerOne = {
-    name: "Tim",
-    marker: "X"
- };
-
+ 
+ function Person(name) {
+    this.name = name;
+}
+Person.prototype.sayName = () => console.log(`Hello, I'm ${this.name}!`);
  function Player(name, marker) {
-    if (!new.target) {
-        throw Error("must use 'new operator");
-    };
-
     this.name = name;
     this.marker = marker;
-    this.sayName = () => console.log(this.name);
  };
+
+Player.prototype.getMarker = () => console.log(`My marker is ${this.marker}`);
+
+Object.getPrototypeOf(Player.prototype);
 
 function Book(title, author, pages, read) {
     this.title = title;
@@ -30,3 +28,11 @@ function Book(title, author, pages, read) {
 }
 
 const theHobbit = new Book("hobbit", "serg", 242, false);
+
+
+Object.setPrototypeOf(Player.prototype, Person.prototype);
+Object.getPrototypeOf(Player.prototype);
+
+const player1 = new Player("steve", "X");
+const player2 = new Player("Tom", "O");
+
