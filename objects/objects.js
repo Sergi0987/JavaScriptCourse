@@ -41,8 +41,29 @@ function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(newBook);
 }
 
+const container = document.querySelector(".container")
+
 function displayBooks(booksArray){
-    for (let i = 0; i < booksArray.length; i++ ) {
-        console.log(booksArray[i].info());
-    }
+    container.textContent = '';
+    booksArray.forEach(element => {
+        console.log(element.info());
+
+        const bookDiv = document.createElement("div");
+        bookDiv.classList.add("book");
+
+        const textContent = document.createElement("p");
+        textContent.textContent = element.info()
+
+        const removeBtn = document.createElement("button");
+        removeBtn.textContent = "Remove"
+        removeBtn.addEventListener("click", () => {
+            bookDiv.remove();
+        });
+
+        bookDiv.append(textContent, removeBtn);
+        container.append(bookDiv);
+
+
+    });
 }
+
